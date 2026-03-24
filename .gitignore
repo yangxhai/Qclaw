@@ -1,0 +1,22 @@
+# 敏感文件
+*.log
+*.tmp
+*.bak
+
+# 缓存目录
+compile-cache/
+backups/
+delivery-queue/
+
+# 浏览器缓存（不要备份浏览器数据）
+browser/openclaw/
+browser/chrome-extension/
+browser/*.json
+
+# 临时文件
+.DS_Store
+*.swp
+*.swo
+
+# Git 目录（不要嵌套）
+.git/

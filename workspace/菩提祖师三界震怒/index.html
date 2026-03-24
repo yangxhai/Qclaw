@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>菩提祖师·三界震怒</title>
+  <style>
+    :root {
+      --gold: #f5c842;
+      --dark-gold: #c8a012;
+      --bg: #0a0608;
+      --red: #8b0000;
+      --white: #f0e6d3;
+      --purple: #2d1b4e;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Georgia', serif;
+      overflow-x: hidden;
+    }
+
+    /* ---- Hero ---- */
+    #hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, #1a0a00 0%, #0a0608 70%);
+      z-index: 0;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,200,66,0.15) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -60%);
+      animation: pulse 4s ease-in-out infinite;
+      z-index: 0;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -60%) scale(1); opacity: 0.6; }
+      50% { transform: translate(-50%, -60%) scale(1.2); opacity: 1; }
+    }
+    .hero-sub {
+      font-size: 0.85rem;
+      letter-spacing: 12px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      z-index: 1;
+      opacity: 0.7;
+      animation: fadeUp 1.5s ease forwards;
+    }
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      text-align: center;
+      line-height: 1.1;
+      z-index: 1;
+      animation: fadeUp 1.5s 0.3s ease forwards;
+      opacity: 0;
+      background: linear-gradient(180deg, #fff8e1 0%, var(--gold) 50%, #c8860a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 30px rgba(245,200,66,0.4));
+    }
+    .hero-title .sub {
+      display: block;
+      font-size: 0.45em;
+      font-weight: 400;
+      letter-spacing: 8px;
+      margin-top: 8px;
+      -webkit-text-fill-color: rgba(245,200,66,0.7);
+    }
+    .hero-divider {
+      width: 120px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 30px auto;
+      z-index: 1;
+      animation: fadeUp 1.5s 0.6s ease forwards;
+      opacity: 0;
+    }
+    .hero-quote {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(240,230,211,0.6);
+      z-index: 1;
+      animation: fadeUp 1.5s 0.9s ease forwards;
+      opacity: 0;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      opacity: 0;
+      animation: fadeUp 2s 1.5s ease forwards;
+      cursor: pointer;
+    }
+    .scroll-arrow {
+      width: 20px; height: 20px;
+      border-right: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      transform: rotate(45deg);
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50% { transform: rotate(45deg) translateY(6px); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---- Acts ---- */
+    .act {
+      min-height: 100vh;
+      padding: 100px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+    }
+    .act-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .act-num {
+      font-size: 0.75rem;
+      letter-spacing: 6px;
+      color: var(--gold);
+      opacity: 0.6;
+      text-transform: uppercase;
+    }
+    .act-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      margin-top: 8px;
+      background: linear-gradient(135deg, var(--gold) 0%, #fff 50%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ---- Timeline ---- */
+    .timeline {
+      max-width: 900px;
+      width: 100%;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, var(--gold), transparent);
+      transform: translateX(-50%);
+    }
+
+    .card {
+      display: flex;
+      gap: 60px;
+      margin-bottom: 80px;
+      align-items: flex-start;
+      position: relative;
+    }
+    .card:nth-child(even) { flex-direction: row-reverse; }
+    .card:nth-child(even) .card-content { text-align: right; }
+    .card::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 20px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 20px rgba(245,200,66,0.8);
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    .card-content { flex: 1; max-width: 380px; }
+    .card-spacer { flex: 1; }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 8px;
+      font-family: 'Arial', sans-serif;
+      letter-spacing: 2px;
+    }
+    .card-desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(240,230,211,0.75);
+      margin-bottom: 12px;
+    }
+    .card-dialogue {
+      background: rgba(245,200,66,0.08);
+      border-left: 3px solid var(--gold);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--white);
+    }
+    .card:nth-child(even) .card-dialogue {
+      border-left: none;
+      border-right: 3px solid var(--gold);
+      border-radius: 8px 0 0 8px;
+    }
+    .card-dialogue .speaker {
+      display: block;
+      font-style: normal;
+      font-weight: 700;
+      color: var(--gold);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .card-dialogue + .card-dialogue { margin-top: 8px; }
+
+    .card-img {
+      flex: 0 0 380px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(245,200,66,0.2);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+    }
+    .card-img:hover {
+      transform: scale(1.03) translateY(-4px);
+      box-shadow: 0 20px 60px rgba(245,200,66,0.2);
+    }
+    .card-img img {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+    .card-img-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 12px 16px;
+      background: linear-gradient(0deg, rgba(0,0,0,0.9), transparent);
+      font-size: 0.8rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    /* ---- Quote Section ---- */
+    .quote-section {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 100px 40px;
+      background: linear-gradient(180deg, var(--bg) 0%, #1a0800 50%, var(--bg) 100%);
+      position: relative;
+    }
+    .quote-section::before {
+      content: '❝';
+      font-size: 8rem;
+      color: rgba(245,200,66,0.08);
+      position: absolute;
+      top: 20px; left: 40px;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+    .main-quote {
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 700;
+      line-height: 1.8;
+      max-width: 650px;
+      color: var(--gold);
+      filter: drop-shadow(0 0 20px rgba(245,200,66,0.3));
+      animation: fadeUp 2s ease forwards;
+    }
+    .main-quote-sub {
+      margin-top: 20px;
+      font-size: 1rem;
+      color: rgba(240,230,211,0.5);
+      font-style: italic;
+    }
+
+    /* ---- Footer ---- */
+    footer {
+      text-align: center;
+      padding: 60px 20px;
+      border-top: 1px solid rgba(245,200,66,0.1);
+      color: rgba(240,230,211,0.3);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+    }
+    footer span { color: var(--gold); opacity: 0.6; }
+
+    /* ---- Modal ---- */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      cursor: pointer;
+    }
+    .modal.active { display: flex; }
+    .modal img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 0 60px rgba(245,200,66,0.3);
+    }
+    .modal-label {
+      color: var(--gold);
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    /* ---- Nav Dots ---- */
+    .nav-dots {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 100;
+    }
+    .nav-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(245,200,66,0.3);
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+    }
+    .nav-dot.active {
+      background: var(--gold);
+      box-shadow: 0 0 10px rgba(245,200,66,0.8);
+      transform: scale(1.4);
+    }
+    .nav-dot:hover { background: rgba(245,200,66,0.7); }
+
+    /* ---- Act color accents ---- */
+    #act1 .card::before { background: #c0392b; box-shadow: 0 0 20px rgba(192,57,43,0.8); }
+    #act2 .card::before { background: #8e44ad; box-shadow: 0 0 20px rgba(142,68,173,0.8); }
+    #act3 .card::before { background: var(--gold); box-shadow: 0 0 20px rgba(245,200,66,0.8); }
+    #act4 .card::before { background: #27ae60; box-shadow: 0 0 20px rgba(39,174,96,0.8); }
+
+    /* ---- Scroll reveal ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ---- Particles ---- */
+    .particle {
+      position: fixed;
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: rgba(245,200,66,0.5);
+      pointer-events: none;
+      z-index: 0;
+      animation: float linear infinite;
+    }
+    @keyframes float {
+      from { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      to { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 768px) {
+      .timeline::before { left: 16px; }
+      .card, .card:nth-child(even) { flex-direction: column; padding-left: 44px; gap: 16px; }
+      .card::before { left: 16px; }
+      .card-spacer { display: none; }
+      .card-content, .card:nth-child(even) .card-content { text-align: left; max-width: 100%; }
+      .card-dialogue, .card:nth-child(even) .card-dialogue {
+        border-left: 3px solid var(--gold); border-right: none;
+        border-radius: 0 8px 8px 0;
+      }
+      .card-img { flex: 0 0 auto; width: 100%; }
+      .nav-dots { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Particles container -->
+<div id="particles"></div>
+
+<!-- Navigation dots -->
+<nav class="nav-dots" id="navDots">
+  <button class="nav-dot active" data-target="hero" title="封面"></button>
+  <button class="nav-dot" data-target="act1" title="第一幕"></button>
+  <button class="nav-dot" data-target="act2" title="第二幕"></button>
+  <button class="nav-dot" data-target="act3" title="第三幕"></button>
+  <button class="nav-dot" data-target="act4" title="第四幕"></button>
+</nav>
+
+<!-- Modal -->
+<div class="modal" id="modal" onclick="closeModal()">
+  <span class="modal-label">— 点击任意处关闭 —</span>
+  <img id="modalImg" src="" alt="">
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <p class="hero-sub">🐒 中式神话燃系动漫</p>
+  <h1 class="hero-title">
+    菩提祖师
+    <span class="sub">· 三界震怒 ·</span>
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-quote">「有一种撑腰，是天塌下来，我替你顶。」</p>
+  <div class="scroll-hint" onclick="document.getElementById('act1').scrollIntoView({behavior:'smooth'})">
+    <span>开始观剧</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ===== ACT 1: 受辱 ===== -->
+<section class="act" id="act1">
+  <div class="act-header reveal">
+    <div class="act-num">第一幕</div>
+    <div class="act-title">🐉 受 辱</div>
+  </div>
+
+  <div class="timeline">
+    <div class="card reveal">
+      <div class="card-content">
+        <div class="card-title">🌧️ 花果山泣血</div>
+        <div class="card-desc">大雨倾盆，花果山水帘洞一片狼藉。猴子猴孙四散奔逃，悟空单膝跪地，金箍棒断成两截，满脸是血。</div>
+        <div class="card-dialogue">
+          <span class="speaker">如来（画外音）</span>
+          "泼猴，当年大闹天宫，本就该魂飞魄散。今日不过是……斩草除根。"
+        </div>
+      </div>
+      <div class="card-spacer"></div>
+      <div class="card-img" onclick="showModal(this)">
+        <img src="https://cdn.pixabay.com/photo/2017/08/01/09/36/waterfall-2567653_1280.jpg"
+             alt="花果山水帘洞"
+             onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#1a0a00,#2d1b4e,#1a0a00)'">
+        <div class="card-img-label">镜头 1-1 · 雨夜花果山</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-content">
+        <div class="card-title">🦅 大鹏嚣张</div>
+        <div class="card-desc">金翅大鹏率天兵踏平花果山，站在云端俯视一切，狂妄至极。</div>
+        <div class="card-dialogue">
+          <span class="speaker">金翅大鹏</span>
+          "如来佛祖说了，花果山妖猴余孽，一个不留！"
+        </div>
+        <div class="card-dialogue" style="margin-top:10px">
+          <span class="speaker">孙悟空</span>
+          "俺老孙……可以死……但花果山……不欠你们……"
+        </div>
+      </div>
+      <div class="card-spacer"></div>
+      <div class="card-img" onclick="showModal(this)">
+        <img src="https://cdn.pixabay.com/photo/2018/04/06/05/06/clouds-3294776_1280.jpg"
+             alt="大鹏俯瞰"
+             onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#1a0800,#3d1a00,#1a0800)'">
+        <div class="card-img-label">镜头 1-3 · 大鹏俯瞰花果山</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-content">
+        <div class="card-title">🌑 暗中注视</div>
+        <div class="card-desc">乌云之中，一道微弱金光若隐若现，似有什么在注视着这一切……</div>
+        <div class="card-dialogue">
+          <span class="speaker">旁白</span>
+          "他们以为，菩提祖师早已不理世事。他们忘了——菩提祖师，不是不管，是还没出手。"
+        </div>
+      </div>
+      <div class="card-spacer"></div>
+      <div class="card-img" onclick="showModal(this)">
+        <img src="https://cdn.pixabay.com/photo/2016/11/29/12/54/landscape-1869760_1280.jpg"
+             alt="乌云金光"
+             onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#1a0500,#3d2800,#1a0500)'">
+        <div class="card-img-label">镜头 1-5 · 乌云中的注视</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ACT 2: 祖师降临 ===== -->
+<section class="act" id="act2">
+  <div class="act-header reveal">
+    <div class="act-num">第二幕</div>
+    <div class="act-title">⚡ 祖师降临</div>
+  </div>
+
+  <div class="timeline">
+    <div class="card reveal">
+      <div class="card-content">
+        <div class="card-title">🌟 天裂</div>
+        <div class="card-desc">天空骤然裂开金色裂缝，金光万道从裂缝中喷涌而出，天地为之颤抖。</div>
+      </div>
+      <div class="card-spacer"></div>
+      <div class="card-img" onclick="showModal(this)">
+        <img src="https://cdn.pixabay.com/photo/2015/09/09/16/05/sunset-932523_1280.jpg"
+             alt="天裂金光"
+             onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#3d2000,#c8a012,#3d2000)'">
+        <div class="card-img-label">镜头 2-1 · 天裂金光</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-content">
+        <div class="card-title">👴 菩提登场</div>
+        <div class="card-desc">金光万道中，菩提祖师从中踏出——白发如瀑，白眉垂肩，道袍飘飘，脚下金莲绽放。</div>
+        <div class="card-dialogue">
+          <span class="speaker">菩提祖师</span>
+          "谁——动了我徒儿？"
+        </div>
+      </div>
+      <div class="card-spacer"></div>
+      <div class="card-img" onclick="showModal(this)">
+        <img src="https://cdn.pixabay.com/photo/2019/12/19/14/20/nature-4705929_1280.jpg"
+             alt="祖师降临"
+             onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#2d1b00,#f5c842,#2d1b00)'">
+        <div class="card-img-label">镜头 2-2 · 菩提祖师降临</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-content">
+        <div class="card-title">💀 万籁俱寂</div>
+        <div class="card-desc">全场屏息，如来脸色大变，三清面面相觑，大鹏还想嚣张……却话未说完。</div>
+        <div class="card-dialogue">
+          <span class="speaker">大鹏（话未完）</span>
+          "哈！菩提祖师？一个老道士而已！你算什——"
+        </div>
+      </div>
+      <div class="card-spacer"></div>
+      <div class="card-img" onclick="showModal(this)">
+        <img src="https://cdn.pixabay.com/photo/2017/09/25/18/27/light-2789127_1280.jpg"
+             alt="诸圣惊惧"
+             onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#1a0500,#4a1500,#1a0500)'">
+        <div class="card-img-label">镜头 2-3 · 三界诸圣惊惧</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ACT 3: 霸气碾压 ===== -->
+<section class="act" id="act3">
+  <div class="act-header reveal">
+    <div class="act-num">第三幕</div>
+    <div class="act-title">🔥 霸气碾压</div>
+  </div>
+
+  <div class="timeline">
+    <div class="card reveal">
+      <div class="card-content">
+        <div class="card-title">🖐️ 一掌碎如来</div>
+        <div class="card-desc">祖师轻轻一挥，如来佛光尽碎，金身开裂，倒退三千里，法相崩碎成万片金光。</div>
+        <div class="card-dialogue">
+          <span class="speaker">菩提祖师</span>
+          "如来。当年我于西牛贺洲讲道时，你还在轮回里打转。你那雷音寺，不过是我随手布下的棋局。"
+        </div>
+        <div class="card-dialogue" style="margin-top:10px">
+          <span class="speaker">如来</span>
+          "祖……祖师……饶命……"
+        </div>
+      </div>
+      <div class="card-spacer"></div>
+      <div class="card-img" onclick="showModal(this)">
+        <img src="https://cdn.pixabay.com/photo/2018/10/04/11/28/light-3623167_1280.jpg"
+             alt="碾压如来"
+             onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#3d0000,#f5c842,#3d0000)'">
+        <div class="card-img-label">镜头 3-1 · 一掌碎如来</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-content">
+        <div class="card-title">☯️ 三清跪伏</div>
+        <div class="card-desc">拂尘一扫，三清法器尽碎——太极图碎、玉如意断、皂玄旗焚，齐齐跪下。</div>
+        <div class="card-dialogue">
+          <span class="speaker">菩提祖师</span>
+          "三清？当年我在须弥山开坛，你们三位……连旁听的资格都没有。今日，却敢对我徒儿袖手旁观？"
+        </div>
+        <div class="card-dialogue" style="margin-top:10px">
+          <span class="speaker">三清（齐跪）</span>
+          "祖师息怒……我等……知错……"
+        </div>
+      </div>
+      <div class="card-spacer"></div>
+      <div class="card-img" onclick="showModal(this)">
+        <img src="https://cdn.pixabay.com/photo/2014/12/27/15/40/sunset-736875_1280.jpg"
+             alt="三清跪伏"
+             onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#2d1b4e,#f5c842,#2d1b4e)'">
+        <div class="card-img-label">镜头 3-2 · 三清齐齐跪伏</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-content">
+        <div class="card-title">🦅 大鹏折翼</div>
+        <div class="card-desc">金翅大鹏想逃，祖师一指点出——金光化作枷锁，将其钉在空中，双翼尽断。</div>
+        <div class="card-dialogue">
+          <span class="speaker">菩提祖师</span>
+          "你这对翅膀，留着何用？"
+        </div>
+      </div>
+      <div class="card-spacer"></div>
+      <div class="card-img" onclick="showModal(this)">
+        <img src="https://cdn.pixabay.com/photo/2016/01/02/14/32/bird-1127666_1280.jpg"
+             alt="大鹏折翼"
+             onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#1a0500,#8b0000,#1a0500)'">
+        <div class="card-img-label">镜头 3-3 · 大鹏折翼坠落</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-content">
+        <div class="card-title">🌐 三界拜服</div>
+        <div class="card-desc">三界诸神、菩萨、罗汉、金刚——全部跪伏于地，无人敢抬头。</div>
+        <div class="card-dialogue">
+          <span class="speaker">旁白</span>
+          "有一种撑腰，叫做——'谁动了我徒儿？'"
+        </div>
+      </div>
+      <div class="card-spacer"></div>
+      <div class="card-img" onclick="showModal(this)">
+        <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
+             alt="三界拜服"
+             onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#1a0a00,#3d2800,#1a0a00)'">
+        <div class="card-img-label">镜头 3-4 · 三界诸圣拜服</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTE ===== -->
+<div class="quote-section">
+  <div class="main-quote reveal">
+    「有一种师傅，不在江湖，<br>江湖却有他的传说。<br>有一种公道，叫做——<br>'谁动了我徒儿？'」
+  </div>
+  <div class="main-quote-sub reveal">—— 旁白 · 尾声</div>
+</div>
+
+<!-- ===== ACT 4: 回家 ===== -->
+<section class="act" id="act4">
+  <div class="act-header reveal">
+    <div class="act-num">第四幕</div>
+    <div class="act-title">🏠 回 家</div>
+  </div>
+
+  <div class="timeline">
+    <div class="card reveal">
+      <div class="card-content">
+        <div class="card-title">🤝 伸手</div>
+        <div class="card-desc">祖师走到悟空面前，俯身，伸出手。悟空满脸是血，泪流满面，抬头望着师傅。</div>
+        <div class="card-dialogue">
+          <span class="speaker">菩提祖师</span>
+          "悟空，起来，随为师——回家。"
+        </div>
+      </div>
+      <div class="card-spacer"></div>
+      <div class="card-img" onclick="showModal(this)">
+        <img src="https://cdn.pixabay.com/photo/2017/05/04/21/25/path-2289276_1280.jpg"
+             alt="伸手"
+             onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#1a0a00,#2d1b00,#1a0a00)'">
+        <div class="card-img-label">镜头 4-1 · 伸手</div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-content">
+        <div class="card-title">🌅 并肩而去</div>
+        <div class="card-desc">师徒牵手，背对三界，在金光中渐行渐远。天空中，只留下祖师的轮廓，如山岳般伫立。</div>
+        <div class="card-dialogue">
+          <span class="speaker">孙悟空</span>
+          "师傅……俺老孙，好久没回家了……"
+        </div>
+        <div class="card-dialogue" style="margin-top:10px">
+          <span class="speaker">菩提祖师</span>
+          "嗯。为师等你，许久了。"
+        </div>
+      </div>
+      <div class="card-spacer"></div>
+      <div class="card-img" onclick="showModal(this)">
+        <img src="https://cdn.pixabay.com/photo/2016/05/05/02/39/sunrise-1373144_1280.jpg"
+             alt="师徒并肩"
+             onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#2d1b00,#f5c842,#1a0800)'">
+        <div class="card-img-label">镜头 4-2 · 师徒并肩，渐行渐远</div>
+      </div>
+    </div>
+
+    <!-- 尾声 -->
+    <div class="card reveal">
+      <div class="card-content">
+        <div class="card-title">📜 尾声字幕</div>
+        <div class="card-desc">三界恢复平静，花果山重新宁静，猴子猴孙仰望天空，师徒的传说永流传。</div>
+        <div class="card-dialogue">
+          <span class="speaker">片尾旁白</span>
+          "有一种师傅，不在江湖，江湖却有他的传说。有一种撑腰，是天塌下来，我替你顶。"
+        </div>
+      </div>
+      <div class="card-spacer"></div>
+      <div class="card-img" onclick="showModal(this)">
+        <img src="https://cdn.pixabay.com/photo/2016/06/15/15/20/sunset-1458020_1280.jpg"
+             alt="片尾"
+             onerror="this.src=''; this.parentElement.style.background='linear-gradient(135deg,#1a0a00,#3d2000,#1a0a00)'">
+        <div class="card-img-label">镜头 4-3 · 尾声 · 太阳照常升起</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>
+    菩提祖师 · 三界震怒 &nbsp;|&nbsp;
+    <span>🐒 中式神话燃系动漫</span> &nbsp;|&nbsp;
+    AI辅助创作 · 仅供娱乐
+  </p>
+  <p style="margin-top:8px; opacity:0.4; font-size:0.75rem;">
+    本故事纯属神话演绎，人物设定基于《西游记》民间传说改编
+  </p>
+</footer>
+
+<script>
+  // Particles
+  (function() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.animationDuration = (Math.random() * 8 + 6) + 's';
+      p.style.animationDelay = (Math.random() * 10) + 's';
+      p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
+      container.appendChild(p);
+    }
+  })();
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Nav dots
+  const dots = document.querySelectorAll('.nav-dot');
+  const sections = ['hero','act1','act2','act3','act4'];
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        dots.forEach(d => d.classList.remove('active'));
+        const dot = document.querySelector(`.nav-dot[data-target="${entry.target.id}"]`);
+        if (dot) dot.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) sectionObserver.observe(el);
+  });
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const target = document.getElementById(dot.dataset.target);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Modal
+  function showModal(card) {
+    const img = card.querySelector('img');
+    const src = img ? img.src : '';
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    if (modalImg && modal) {
+      modalImg.src = src;
+      modal.classList.add('active');
+    }
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('modal');
+    if (modal) modal.classList.remove('active');
+  }
+
+  // ESC to close modal
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Hero glow interactive mouse
+  const heroGlow = document.querySelector('.hero-glow');
+  document.addEventListener('mousemove', e => {
+    if (heroGlow) {
+      const x = (e.clientX / window.innerWidth - 0.5) * 40;
+      const y = (e.clientY / window.innerHeight - 0.5) * 40;
+      heroGlow.style.transform = `translate(calc(-50% + ${x}px), calc(-60% + ${y}px))`;
+    }
+  });
+</script>
+</body>
+</html>

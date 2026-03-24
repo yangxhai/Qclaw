@@ -1,0 +1,5 @@
+{
+  "guid": "${QCLAW_USER_GUID}",
+  "uid": "${QCLAW_USER_ID}",
+  "source_terminal": "wechat"
+}

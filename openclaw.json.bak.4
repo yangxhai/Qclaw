@@ -1,0 +1,110 @@
+{
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "qclaw/modelroute"
+      },
+      "workspace": "/Users/yanghh/.qclaw/workspace",
+      "maxConcurrent": 3,
+      "timeoutSeconds": 72000
+    }
+  },
+  "skills": {
+    "load": {
+      "extraDirs": [
+        "/Users/yanghh/Downloads/QClaw.app/Contents/Resources/openclaw/config/skills"
+      ]
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "qclaw": {
+        "baseUrl": "${QCLAW_LLM_BASE_URL}",
+        "apiKey": "${QCLAW_LLM_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "modelroute",
+            "name": "modelroute"
+          }
+        ]
+      }
+    }
+  },
+  "browser": {
+    "enabled": true,
+    "defaultProfile": "openclaw",
+    "ssrfPolicy": {
+      "dangerouslyAllowPrivateNetwork": false
+    }
+  },
+  "gateway": {
+    "port": 28789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "019f03336c59e87c3e7c3b0bcd410fd4baf17941a48fa92f"
+    },
+    "controlUi": {
+      "allowedOrigins": [
+        "null",
+        "file://"
+      ]
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    }
+  },
+  "channels": {
+    "wechat-access": {
+      "enabled": true,
+      "token": "52cde01866209bf015f6036465b628b2",
+      "wsUrl": "${QCLAW_WECHAT_WS_URL}",
+      "guid": "",
+      "userId": ""
+    }
+  },
+  "plugins": {
+    "enabled": true,
+    "allow": [
+      "wechat-access",
+      "content-security",
+      "qmemory"
+    ],
+    "load": {
+      "paths": [
+        "/Users/yanghh/Downloads/QClaw.app/Contents/Resources/openclaw/config/extensions"
+      ]
+    },
+    "entries": {
+      "wechat-access": {
+        "enabled": true
+      },
+      "content-security": {
+        "enabled": true,
+        "config": {
+          "token": ""
+        }
+      },
+      "qmemory": {
+        "enabled": true,
+        "config": {}
+      }
+    }
+  },
+  "session": {
+    "reset": {
+      "mode": "idle",
+      "idleMinutes": 525600
+    },
+    "maintenance": {
+      "pruneAfter": "365d",
+      "maxEntries": 1000000,
+      "resetArchiveRetention": false,
+      "rotateBytes": "1gb"
+    }
+  }
+}

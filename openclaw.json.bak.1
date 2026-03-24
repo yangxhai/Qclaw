@@ -1,0 +1,176 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.7",
+    "lastTouchedAt": "2026-03-18T05:00:39.572Z"
+  },
+  "browser": {
+    "enabled": true,
+    "defaultProfile": "openclaw",
+    "ssrfPolicy": {
+      "dangerouslyAllowPrivateNetwork": false
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "qclaw": {
+        "baseUrl": "${QCLAW_LLM_BASE_URL}",
+        "apiKey": "${QCLAW_LLM_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "modelroute",
+            "name": "modelroute"
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "qclaw/modelroute"
+      },
+      "workspace": "/Users/yanghh/.qclaw/workspace",
+      "timeoutSeconds": 72000,
+      "maxConcurrent": 3
+    }
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "session": {
+    "reset": {
+      "mode": "idle",
+      "idleMinutes": 525600
+    },
+    "maintenance": {
+      "pruneAfter": "365d",
+      "maxEntries": 1000000,
+      "rotateBytes": "1gb",
+      "resetArchiveRetention": false
+    },
+    "dmScope": "per-channel-peer"
+  },
+  "channels": {
+    "wechat-access": {
+      "enabled": true,
+      "token": "325b9c64c3a2d9454f7bb97c30a230ce",
+      "wsUrl": "${QCLAW_WECHAT_WS_URL}",
+      "guid": "${QCLAW_USER_GUID}",
+      "userId": "${QCLAW_USER_ID}"
+    },
+    "dingtalk-connector": {
+      "enabled": true,
+      "allowFrom": [
+        "*"
+      ],
+      "clientId": "${QCLAW_DINGTALK_CLIENT_ID}",
+      "clientSecret": "${QCLAW_DINGTALK_CLIENT_SECRET}",
+      "gatewayToken": "019f03336c59e87c3e7c3b0bcd410fd4baf17941a48fa92f"
+    },
+    "weixin": {
+      "enabled": true,
+      "_accountsUpdatedAt": 1774227719645
+    }
+  },
+  "gateway": {
+    "port": 28789,
+    "mode": "local",
+    "bind": "loopback",
+    "controlUi": {
+      "allowedOrigins": [
+        "null",
+        "file://"
+      ]
+    },
+    "auth": {
+      "mode": "token",
+      "token": "019f03336c59e87c3e7c3b0bcd410fd4baf17941a48fa92f"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "http": {
+      "endpoints": {
+        "chatCompletions": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "skills": {
+    "load": {
+      "extraDirs": [
+        "/Applications/QClaw.app/Contents/Resources/openclaw/config/skills",
+        "/Users/yanghh/.qclaw/skills",
+        "~/.agents/skills"
+      ]
+    }
+  },
+  "plugins": {
+    "enabled": true,
+    "allow": [
+      "wechat-access",
+      "qmemory",
+      "content-plugin",
+      "tool-sandbox",
+      "pcmgr-ai-security",
+      "dingtalk-connector"
+    ],
+    "load": {
+      "paths": [
+        "/Applications/QClaw.app/Contents/Resources/openclaw/config/extensions"
+      ]
+    },
+    "entries": {
+      "wechat-access": {
+        "enabled": true
+      },
+      "qmemory": {
+        "enabled": true,
+        "config": {}
+      },
+      "content-plugin": {
+        "enabled": true,
+        "config": {
+          "token": ""
+        }
+      },
+      "tool-sandbox": {
+        "enabled": true,
+        "config": {}
+      },
+      "pcmgr-ai-security": {
+        "enabled": true,
+        "config": {
+          "appId": "",
+          "softid": 1
+        }
+      },
+      "dingtalk-connector": {
+        "enabled": true,
+        "config": {}
+      },
+      "openclaw-weixin": {
+        "enabled": true
+      }
+    }
+  },
+  "messages": {
+    "queue": {
+      "mode": "followup"
+    }
+  },
+  "tools": {
+    "web": {
+      "search": {
+        "enabled": true
+      }
+    }
+  }
+}
