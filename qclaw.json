@@ -1,8 +1,8 @@
 {
   "cli": {
     "nodeBinary": "/Applications/QClaw.app/Contents/Frameworks/QClaw Helper.app/Contents/MacOS/QClaw Helper",
-    "openclawMjs": "/Applications/QClaw.app/Contents/Resources/openclaw/node_modules/openclaw/openclaw.mjs",
-    "pid": 19785
+    "openclawMjs": "/Users/yanghh/Library/Application Support/QClaw/openclaw/node_modules/openclaw/openclaw.mjs",
+    "pid": 98135
   },
   "stateDir": "/Users/yanghh/.qclaw",
   "configPath": "/Users/yanghh/.qclaw/openclaw.json",

@@ -78,8 +78,8 @@
       "enabled": true,
       "token": "325b9c64c3a2d9454f7bb97c30a230ce",
       "wsUrl": "${QCLAW_WECHAT_WS_URL}",
-      "guid": "${QCLAW_USER_GUID}",
-      "userId": "${QCLAW_USER_ID}"
+      "guid": "70da4d21fe57dc58f0e29c9b0360f533e5bd2eb803d763612740fefbb4444525",
+      "userId": "894615921"
     },
     "dingtalk-connector": {
       "enabled": true,
@@ -129,7 +129,119 @@
         "~/.agents/skills"
       ]
     },
-    "entries": {}
+    "entries": {
+      "agent-mbti": {
+        "enabled": false
+      },
+      "algorithmic-art": {
+        "enabled": false
+      },
+      "analytics-dashboard": {
+        "enabled": false
+      },
+      "arxiv-reader": {
+        "enabled": false
+      },
+      "arxiv-watcher": {
+        "enabled": false
+      },
+      "brand-guidelines": {
+        "enabled": false
+      },
+      "cantian-bazi": {
+        "enabled": false
+      },
+      "citation-manager": {
+        "enabled": false
+      },
+      "content-repurposer": {
+        "enabled": false
+      },
+      "doc-coauthoring": {
+        "enabled": false
+      },
+      "earnings-tracker": {
+        "enabled": false
+      },
+      "github-ai-trends": {
+        "enabled": false
+      },
+      "goal-tracker": {
+        "enabled": false
+      },
+      "habit-coach": {
+        "enabled": false
+      },
+      "habit-tracker": {
+        "enabled": false
+      },
+      "humanize-ai-text": {
+        "enabled": false
+      },
+      "idea-validator": {
+        "enabled": false
+      },
+      "internal-comms": {
+        "enabled": false
+      },
+      "log-analyzer": {
+        "enabled": false
+      },
+      "macro-monitor": {
+        "enabled": false
+      },
+      "market-researcher": {
+        "enabled": false
+      },
+      "mcp-builder": {
+        "enabled": false
+      },
+      "movie-advisor": {
+        "enabled": false
+      },
+      "music-recommender": {
+        "enabled": false
+      },
+      "night-owl-shrimp": {
+        "enabled": false
+      },
+      "niuamaxia-scheduler": {
+        "enabled": false
+      },
+      "note-organizer": {
+        "enabled": false
+      },
+      "Nutritionist": {
+        "enabled": false
+      },
+      "quant-backtest": {
+        "enabled": false
+      },
+      "slack-gif-creator": {
+        "enabled": false
+      },
+      "study-habits": {
+        "enabled": false
+      },
+      "tarot": {
+        "enabled": false
+      },
+      "theme-factory": {
+        "enabled": false
+      },
+      "travel-planner": {
+        "enabled": false
+      },
+      "video-script": {
+        "enabled": false
+      },
+      "web-artifacts-builder": {
+        "enabled": false
+      },
+      "webapp-testing": {
+        "enabled": false
+      }
+    }
   },
   "plugins": {
     "enabled": true,
@@ -140,7 +252,10 @@
       "tool-sandbox",
       "pcmgr-ai-security",
       "dingtalk-connector",
-      "openclaw-weixin"
+      "openclaw-weixin",
+      "openclaw-mem0",
+      "cron-delivery-guard",
+      "prompt-optimizer"
     ],
     "load": {
       "paths": [
@@ -177,6 +292,22 @@
         "config": {}
       },
       "openclaw-weixin": {
+        "enabled": true,
+        "config": {}
+      },
+      "openclaw-mem0": {
+        "enabled": true,
+        "config": {
+          "mode": "server",
+          "useProxy": true,
+          "userId": "default"
+        }
+      },
+      "prompt-optimizer": {
+        "enabled": true,
+        "config": {}
+      },
+      "cron-delivery-guard": {
         "enabled": true,
         "config": {}
       }

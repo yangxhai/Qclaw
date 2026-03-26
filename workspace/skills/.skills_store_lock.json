@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "session-cleaner": {
+      "name": "Session Cleaner",
+      "zip_url": "https://lightmake.site/api/v1/download?slug=session-cleaner",
+      "source": "skillhub",
+      "version": "1.0.0"
+    }
+  }
+}
